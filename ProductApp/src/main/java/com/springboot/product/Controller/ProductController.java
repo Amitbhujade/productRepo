@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.springboot.product.Model.Customer;
 import com.springboot.product.Model.Product;
 import com.springboot.product.Service.ProductService;
 
@@ -55,8 +56,9 @@ public class ProductController {
 		return new ResponseEntity<>(productService.updateProduct(id, product),HttpStatus.OK);
 	}
 	
+	
 	  @GetMapping("/template/customer")
-	    public String getProductList() {
+	    public String getCustomerList() {
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	        HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -64,37 +66,37 @@ public class ProductController {
 	        return restTemplate.exchange("http://localhost:8080/customer", HttpMethod.GET, entity, String.class).getBody();
 	    }
 	  
-//	  @RequestMapping(value = "/template/customer", method = RequestMethod.POST)
-//	   public String createProducts(@RequestBody Customer customer) {
-//	      HttpHeaders headers = new HttpHeaders();
-//	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//	      HttpEntity<Customer> entity = new HttpEntity<Customer>(customer,headers);
-//	      
-//	      return restTemplate.exchange(
-//	         "http://localhost:8080/customer", HttpMethod.POST, entity, String.class).getBody();
-//	   }
+	  @RequestMapping(value = "/template/customer", method = RequestMethod.POST)
+	   public String createCustomer(@RequestBody Customer customer) {
+	      HttpHeaders headers = new HttpHeaders();
+	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	      HttpEntity<Customer> entity = new HttpEntity<Customer>(customer,headers);
+	      
+	      return restTemplate.exchange(
+	         "http://localhost:8080/customer", HttpMethod.POST, entity, String.class).getBody();
+	   }
 	  
-//
-//	   @RequestMapping(value = "/template/customer/{id}", method = RequestMethod.PUT)
-//	   public String updateProduct(@PathVariable("id") int id, @RequestBody Customer customer) {
-//	      HttpHeaders headers = new HttpHeaders();
-//	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//	      HttpEntity<Customer> entity = new HttpEntity<Customer>(customer,headers);
-//	      
-//	      return restTemplate.exchange(
-//	         "http://localhost:8080/customer/"+id, HttpMethod.PUT, entity, String.class).getBody();
-//	   }
-//	   
-//
-//	   @RequestMapping(value = "/template/customer/{id}", method = RequestMethod.DELETE)
-//	   public String deleteProduct(@PathVariable("id") int id) {
-//	      HttpHeaders headers = new HttpHeaders();
-//	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//	      HttpEntity<Customer> entity = new HttpEntity<Customer>(headers);
-//	      
-//	      return restTemplate.exchange(
-//	         "http://localhost:8080/customer/"+id, HttpMethod.DELETE, entity, String.class).getBody();
-//	   }
-//	   
+
+	   @RequestMapping(value = "/template/customer/{id}", method = RequestMethod.PUT)
+	   public String updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
+	      HttpHeaders headers = new HttpHeaders();
+	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	      HttpEntity<Customer> entity = new HttpEntity<Customer>(customer,headers);
+	      
+	      return restTemplate.exchange(
+	         "http://localhost:8080/customer/"+id, HttpMethod.PUT, entity, String.class).getBody();
+	   }
+	   
+
+	   @RequestMapping(value = "/template/customer/{id}", method = RequestMethod.DELETE)
+	   public String deleteCustomer(@PathVariable ("id") int id) {
+	      HttpHeaders headers = new HttpHeaders();
+	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	      HttpEntity<Customer> entity = new HttpEntity<Customer>(headers);
+	      
+	      return restTemplate.exchange(
+	         "http://localhost:8080/customer/"+id, HttpMethod.DELETE, entity, String.class).getBody();
+	   }
+	   
 	
 }
